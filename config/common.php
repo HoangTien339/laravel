@@ -19,4 +19,44 @@ return [
             ],
         ],
     ],
+    'export' => [
+        'file_name' => 'Export-%s',
+        'types' => [
+            'xlsx' => [
+                'label' => 'export.file_type.excel',
+                'value' => 'xlsx',
+                'mime' => 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+                ],
+            'csv' => [
+                'label' => 'export.file_type.csv',
+                'value' => 'csv',
+                'mime' => 'text/csv',
+                'separation' => [
+                    'tab' => [
+                        'label' => 'export.separate_char.tab',
+                        'value' => '\t',
+                    ],
+                    'comma' => [
+                        'label' => 'export.separate_char.comma',
+                        'value' => ',',
+                    ],
+                    'semi_colon' => [
+                        'label' => 'export.separate_char.semi_colon',
+                        'value' => ';',
+                    ],
+                ],
+            ],
+        ],
+        'export_column' => [
+            'id' => 'export.export_column.id',
+            'name' => 'export.export_column.name',
+            'created_at' => 'export.export_column.created_at',
+            'updated_at' => 'export.export_column.updated_at',
+        ],
+        'encoding' => [
+            'utf8' => 'UTF-8',
+            'shiftjis' => 'Shift-JIS',
+            'eucjp' => 'EUC-JP',
+        ]
+    ]
 ];

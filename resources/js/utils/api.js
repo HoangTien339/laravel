@@ -20,20 +20,35 @@ axios.interceptors.request.use(request => {
 axios.interceptors.response.use(response => Promise.resolve(response.config.originData ? response : response.data), error => {
   const { status } = error.response
 
-  if (status >= 500) {
+  if (status === 401) {
+    if (store.getters['auth/check']) {
+      swal('warning', {
+        title: $t('error.token_expired.title'),
+        text: $t('error.token_expired.text')
+      }).then(() => {
+        store.commit('auth/LOGOUT')
+        router.push({ name: 'login' })
+      })
+    }
+  } else {
+    let text = $t('error.unknown');
+    switch (status) {
+    case 500:
+      text = $t('error.server')
+      break
+    case 403:
+      text = $t('error.forbidden')
+      break
+    case 404:
+      text = $t('error.not_found')
+      break
+    case 421:
+      text = $t('error.misdirect_request')
+      break
+    }
     swal('error', {
       title: status,
-      text: $t('error.server')
-    })
-  }
-
-  if (status === 401 && store.getters['auth/check']) {
-    swal('warning', {
-      title: $t('error.token_expired.title'),
-      text: $t('error.token_expired.text')
-    }).then(() => {
-      store.commit('auth/LOGOUT')
-      router.push({ name: 'login' })
+      text
     })
   }
 

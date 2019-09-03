@@ -10,7 +10,6 @@ use Illuminate\Support\Facades\Validator;
 class ImportFileCsvRequest extends FormRequest
 {
 
-    public $a = 3;
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -60,7 +59,7 @@ class ImportFileCsvRequest extends FormRequest
     {
         return [
             'file.required' => trans('import.message.file_required'),
-            'file.max' => trans('import.message.file_max', ['capacity' => config('common.import.validate.file.max')]),
+            'file.max' => trans('import.message.file_max', ['max' => config('common.import.validate.file.max')]),
         ];
     }
 }
